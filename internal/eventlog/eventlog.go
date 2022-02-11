@@ -181,7 +181,7 @@ func (lg *Log) waitStateChange(ctx context.Context) (logState, error) {
 	lg.mu.RUnlock()
 	select {
 	case <-ctx.Done():
-		return logState{}, ctx.Err()
+		return lg.state(), ctx.Err()
 	case <-ch:
 		return lg.state(), nil
 	}
